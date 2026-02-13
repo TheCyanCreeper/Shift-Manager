@@ -2,71 +2,69 @@ import Card from "../UI/Card";
 import CalendarCell from "./CalendarCell";
 import './Calendar.css';
 
-
-export default function Calendar(props) {
+export default function Calendar({ schedule, onDayClick, selectedDate }) {
     const curr_date = new Date();
     const curr_month = curr_date.getMonth();
     const curr_year = curr_date.getFullYear();
 
-    const first_day = new Date(curr_year, curr_month, 1);
-    const first_day_of_week = first_day.getDay();
+    const first_day_of_month = new Date(curr_year, curr_month, 1);
+    const first_day_index = first_day_of_month.getDay();
+    const days_in_month = new Date(curr_year, curr_month + 1, 0).getDate();
 
-    // Create a date for the first day of the next month
-    const first_day_next_month = new Date(curr_year, curr_month + 1, 1);
-
-    // Subtract one day to get the last day of the current month
-    const last_day_curr_month = new Date(first_day_next_month - 1);
-
-    const total_days = last_day_curr_month.getDate();
-
-    const table_rows = [];
-    const BASE_CELL_CLASS = "calender-cell"
-    let day = 0;
-    for (let i = 0; i < 5; i++) {
-        let cell_class = BASE_CELL_CLASS;
-
-        const table_cells = []
-        for (let j = 0; j < 7; j++) {
-            let is_empty = false;
-            if (i == 0) {
-                if (j < first_day_of_week) {
-                    cell_class += " empty"
-                    is_empty = true;
-                } else {
-                    day++;
-                }
-            } else if (i > 0) {
-                if (day < total_days) {
-                    day++; 
-                } else {
-                    is_empty = true;
-                }
-            }
-            let output_day = is_empty ? " " : day;
-            table_cells.push(<CalendarCell className={cell_class} day_val={output_day} />)
-        }
-        
-        table_rows.push(<tr>{table_cells}</tr>)
-        console.log()
+    const calendar_cells = [];
+    
+    for (let i = 0; i < first_day_index; i++) {
+        calendar_cells.push(<CalendarCell key={`empty-${i}`} empty={true} />);
     }
 
-    return <Card className="calendar">
-        <h3 className="calendar-month">{curr_date.toLocaleDateString('en-US',{month:"long"})}</h3>
-        <table className="calendar-days">
-            <thead>
-                <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-                </tr>
-            </thead>
-            <tbody>
-                {table_rows}
-            </tbody>
-        </table>
-    </Card>;
+    for (let day = 1; day <= days_in_month; day++) {
+        const dateString = `${curr_year}-${String(curr_month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const hasShift = schedule.some(s => s.date === dateString);
+        const isSelected = selectedDate === dateString;
+
+        calendar_cells.push(
+            <CalendarCell 
+                key={day} 
+                day_val={day}
+                hasShift={hasShift}
+                isSelected={isSelected}
+                onClick={() => onDayClick(dateString)}
+            />
+        );
+    }
+
+    const total_slots = Math.ceil(calendar_cells.length / 7) * 7;
+    const remaining_slots = total_slots - calendar_cells.length;
+    for (let i = 0; i < remaining_slots; i++) {
+        calendar_cells.push(<CalendarCell key={`empty-end-${i}`} empty={true} />);
+    }
+
+    const rows = [];
+    for (let i = 0; i < calendar_cells.length; i += 7) {
+        rows.push(<tr key={i}>{calendar_cells.slice(i, i + 7)}</tr>);
+    }
+
+    return (
+        <div className="calendar">
+            <h3 className="calendar-month">
+                {curr_date.toLocaleDateString('en-US', { month: "long", year: "numeric" })}
+            </h3>
+            <table className="calendar-days">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+        </div>
+    );
 }

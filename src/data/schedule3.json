@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-02-14",
+    "startTime": "17:00",
+    "endTime": "23:00",
+    "position": "Bartender"
+  },
+  {
+    "date": "2026-02-15",
+    "startTime": "17:00",
+    "endTime": "23:00",
+    "position": "Bartender"
+  },
+  {
+    "date": "2026-02-20",
+    "startTime": "18:00",
+    "endTime": "02:00",
+    "position": "Bartender"
+  },
+  {
+    "date": "2026-02-21",
+    "startTime": "18:00",
+    "endTime": "02:00",
+    "position": "Mixologist"
+  },
+  {
+    "date": "2026-02-27",
+    "startTime": "17:00",
+    "endTime": "01:00",
+    "position": "Bartender"
+  }
+]
