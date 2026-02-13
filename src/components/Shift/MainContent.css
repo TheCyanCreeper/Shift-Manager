@@ -1,4 +1,36 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 .main {
     width: fit-content;
     overflow: hidden;
+    padding: 20px;
+}
+
+.schedule-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.schedule-controls button.active {
+    background-color: #646cff;
+    color: white;
+}
+
+.details-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    text-align: left;
+    min-height: 150px;
+}
+
+.details-content p {
+    margin: 5px 0;
+    font-size: 1.1em;
 }

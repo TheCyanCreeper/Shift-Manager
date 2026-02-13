@@ -1,7 +1,44 @@
-/* .calendar-cell {
-    padding: 2%;
-} */
+.calendar-cell {
+    height: 80px;
+    width: 80px;
+    border: 1px solid #444;
+    cursor: pointer;
+    vertical-align: top;
+    padding: 5px;
+    transition: background-color 0.2s;
+}
 
-.calendar-cell:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+.calendar-cell.empty {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-cell:hover:not(.empty) {
+    background-color: #333;
+}
+
+.calendar-cell.selected {
+    background-color: #444;
+    border: 2px solid #646cff;
+}
+
+.calendar-cell.has-shift {
+    background-color: #2a2a35;
+}
+
+.day-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.shift-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #646cff;
+    border-radius: 50%;
+    margin-bottom: 5px;
 }
