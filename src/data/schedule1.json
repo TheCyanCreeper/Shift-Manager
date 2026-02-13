@@ -1,32 +1,36 @@
-[
-  {
-    "date": "2026-02-14",
-    "startTime": "09:00",
-    "endTime": "17:00",
-    "position": "Manager"
-  },
-  {
-    "date": "2026-02-16",
-    "startTime": "09:00",
-    "endTime": "17:00",
-    "position": "Manager"
-  },
-  {
-    "date": "2026-02-17",
-    "startTime": "10:00",
-    "endTime": "18:00",
-    "position": "Server"
-  },
-  {
-    "date": "2026-02-18",
-    "startTime": "09:00",
-    "endTime": "15:00",
-    "position": "Manager"
-  },
-  {
-    "date": "2026-02-20",
-    "startTime": "16:00",
-    "endTime": "22:00",
-    "position": "Host"
-  }
-]
+{
+  "employeeName": "Sarah (Manager)",
+  "shifts": [
+    {
+      "day": 2,
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "position": "Manager"
+    },
+    {
+      "day": 5,
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "position": "Manager"
+    },
+    {
+      "day": 12,
+      "startTime": "10:00",
+      "endTime": "18:00",
+      "position": "Server"
+    },
+    {
+      "day": 18,
+      "startTime": "09:00",
+      "endTime": "15:00",
+      "position": "Manager"
+    },
+    {
+      "day": 25,
+      "startTime": "16:00",
+      "endTime": "22:00",
+      "position": "Host"
+    }
+  ],
+  "timeOffRequests": [8, 9, 22]
+}

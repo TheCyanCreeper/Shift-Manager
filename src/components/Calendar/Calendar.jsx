@@ -2,9 +2,10 @@ import Card from "../UI/Card";
 import CalendarCell from "./CalendarCell";
 import './Calendar.css';
 
-export default function Calendar({ schedule, onDayClick, selectedDate }) {
-    const curr_month = 1;
-    const curr_year = 2026;
+export default function Calendar({ schedule, timeOffs, onDayClick, selectedDate, pendingSwapDates }) {
+    const today = new Date();
+    const curr_month = today.getMonth();
+    const curr_year = today.getFullYear();
 
     const displayDate = new Date(curr_year, curr_month, 1);
     
@@ -21,14 +22,18 @@ export default function Calendar({ schedule, onDayClick, selectedDate }) {
     for (let day = 1; day <= days_in_month; day++) {
         const dateString = `${curr_year}-${String(curr_month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const shift = schedule.find(s => s.date === dateString);
+        const isTimeOff = timeOffs.includes(dateString);
         const isSelected = selectedDate === dateString;
+        const isSwapTarget = pendingSwapDates.includes(dateString);
 
         calendar_cells.push(
             <CalendarCell 
                 key={day} 
                 day_val={day}
-                shift={shift} 
+                shift={shift}
+                isTimeOff={isTimeOff}
                 isSelected={isSelected}
+                isSwapTarget={isSwapTarget}
                 onClick={() => onDayClick(dateString)}
             />
         );
