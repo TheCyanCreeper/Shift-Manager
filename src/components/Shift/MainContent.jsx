@@ -17,7 +17,6 @@ export default function MainContent() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const activeSchedule = SCHEDULES[activeScheduleName];
-
   const selectedShift = activeSchedule.find(shift => shift.date === selectedDate);
 
   const handleDayClick = (date) => {
@@ -41,32 +40,40 @@ export default function MainContent() {
         ))}
       </div>
 
-      <Card className="main">
-        <Calendar 
-          schedule={activeSchedule} 
-          onDayClick={handleDayClick}
-          selectedDate={selectedDate}
-        />
-      </Card>
+      <div className="content-row">
+        <Card className="main">
+          <Calendar 
+            schedule={activeSchedule} 
+            onDayClick={handleDayClick}
+            selectedDate={selectedDate}
+          />
+        </Card>
 
-      <Card className="details-card">
-        <h3>Shift Details</h3>
-        {selectedDate ? (
-            <div className="details-content">
-                <p><strong>Date:</strong> {selectedDate}</p>
-                {selectedShift ? (
-                    <>
-                        <p><strong>Position:</strong> {selectedShift.position}</p>
-                        <p><strong>Time:</strong> {selectedShift.startTime} - {selectedShift.endTime}</p>
-                    </>
-                ) : (
-                    <p>No shift scheduled for this day.</p>
-                )}
-            </div>
-        ) : (
-            <p>Select a day to view details.</p>
-        )}
-      </Card>
+        <Card className="details-card">
+          <h3>Shift Details</h3>
+          {selectedDate ? (
+              <div className="details-content">
+                  <p className="detail-date">{new Date(selectedDate).toLocaleDateString(undefined, {weekday: 'long', month: 'long', day: 'numeric'})}</p>
+                  {selectedShift ? (
+                      <>
+                          <div className="detail-item">
+                            <span className="label">Position:</span>
+                            <span className="value">{selectedShift.position}</span>
+                          </div>
+                          <div className="detail-item">
+                            <span className="label">Time:</span>
+                            <span className="value">{selectedShift.startTime} - {selectedShift.endTime}</span>
+                          </div>
+                      </>
+                  ) : (
+                      <p className="no-shift">No shift scheduled.</p>
+                  )}
+              </div>
+          ) : (
+              <p className="placeholder-text">Select a day on the calendar to view details.</p>
+          )}
+        </Card>
+      </div>
     </div>
   );
 }

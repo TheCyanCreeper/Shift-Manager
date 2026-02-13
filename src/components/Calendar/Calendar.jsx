@@ -3,10 +3,11 @@ import CalendarCell from "./CalendarCell";
 import './Calendar.css';
 
 export default function Calendar({ schedule, onDayClick, selectedDate }) {
-    const curr_date = new Date();
-    const curr_month = curr_date.getMonth();
-    const curr_year = curr_date.getFullYear();
+    const curr_month = 1;
+    const curr_year = 2026;
 
+    const displayDate = new Date(curr_year, curr_month, 1);
+    
     const first_day_of_month = new Date(curr_year, curr_month, 1);
     const first_day_index = first_day_of_month.getDay();
     const days_in_month = new Date(curr_year, curr_month + 1, 0).getDate();
@@ -19,14 +20,14 @@ export default function Calendar({ schedule, onDayClick, selectedDate }) {
 
     for (let day = 1; day <= days_in_month; day++) {
         const dateString = `${curr_year}-${String(curr_month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const hasShift = schedule.some(s => s.date === dateString);
+        const shift = schedule.find(s => s.date === dateString);
         const isSelected = selectedDate === dateString;
 
         calendar_cells.push(
             <CalendarCell 
                 key={day} 
                 day_val={day}
-                hasShift={hasShift}
+                shift={shift} 
                 isSelected={isSelected}
                 onClick={() => onDayClick(dateString)}
             />
@@ -47,7 +48,7 @@ export default function Calendar({ schedule, onDayClick, selectedDate }) {
     return (
         <div className="calendar">
             <h3 className="calendar-month">
-                {curr_date.toLocaleDateString('en-US', { month: "long", year: "numeric" })}
+                {displayDate.toLocaleDateString('en-US', { month: "long", year: "numeric" })}
             </h3>
             <table className="calendar-days">
                 <thead>

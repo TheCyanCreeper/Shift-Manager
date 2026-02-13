@@ -3,12 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
-}
-
-.main {
-    width: fit-content;
-    overflow: hidden;
-    padding: 20px;
+    width: 100%;
 }
 
 .schedule-controls {
@@ -22,15 +17,69 @@
     color: white;
 }
 
-.details-card {
+.content-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
     width: 100%;
-    max-width: 700px;
-    padding: 20px;
-    text-align: left;
-    min-height: 150px;
+    flex-wrap: wrap; 
 }
 
-.details-content p {
-    margin: 5px 0;
+.main {
+    flex: 2;
+    min-width: 600px;
+    overflow: visible; 
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+.details-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 25px;
+    text-align: left;
+    min-height: 200px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.details-card h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #213547;
+}
+
+.detail-date {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #646cff;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    margin-bottom: 15px;
+}
+
+.detail-item .label {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.detail-item .value {
     font-size: 1.1em;
+    color: #213547;
+}
+
+.placeholder-text, .no-shift {
+    color: #888;
+    font-style: italic;
 }
